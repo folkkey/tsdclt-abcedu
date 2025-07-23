@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # ⚠️ Nếu URL bắt đầu bằng /en
+  RewriteCond %{REQUEST_URI} ^/en
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^en(/.*)?$ /en/index.html [QSA,L]
+
+  # 🔁 Nếu không phải file hoặc folder thực tế → về index.html gốc
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
